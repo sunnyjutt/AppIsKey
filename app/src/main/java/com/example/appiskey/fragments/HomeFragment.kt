@@ -18,6 +18,8 @@ import com.example.appiskey.network.ApiClient
 import com.example.appiskey.network.ApiInterface
 import com.example.appiskey.viewmodels.HomeViewModel
 import com.example.appiskey.viewmodels.HomeViewModelFactory
+import java.util.*
+import kotlin.collections.HashMap
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -42,6 +44,8 @@ class HomeFragment : Fragment() {
         binding.rvImagesDetail.layoutManager = LinearLayoutManager(context)
         binding.rvImagesDetail.adapter = ImagesDetailAdapter(requireContext(), imagesList, ::onImageClick)
         binding.progressBar.visibility = View.GONE
+
+        Toast.makeText(requireContext(), countRepeatedWords("THE the app the a is no the").toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun setObserver() {
@@ -57,6 +61,22 @@ class HomeFragment : Fragment() {
 
     private fun onImageClick(url: String) {
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToImageDetailFragment(url))
+    }
+
+    private fun countRepeatedWords(input: String): HashMap<String, Int> {
+        val wordsHashMap = HashMap<String, Int>()
+        val words = input.split(Regex(" "))
+
+        words.forEach {
+            val lowercaseWord = it.lowercase(Locale.ROOT)
+            if (lowercaseWord in wordsHashMap) {
+                wordsHashMap[lowercaseWord] = wordsHashMap[lowercaseWord]!! + 1
+            } else {
+                wordsHashMap[lowercaseWord] = 1
+            }
+        }
+
+        return wordsHashMap
     }
 
 }
