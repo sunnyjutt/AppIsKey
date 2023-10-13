@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AppisKey</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user">User:</string>
+    <string name="tags">Tags:</string>
+    <string name="likes">Likes</string>
+    <string name="simple_android_app">Simple Android App</string>
+    <string name="image_detail">Image Detail</string>
+</resources>
